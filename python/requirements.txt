@@ -1,0 +1,11 @@
+xlrd==1.2.0
+xlwt
+xlutils
+gurobipy==9.5.2
+auto-py-to-exe
+pyexcel
+pyexcel-xls
+pyexcel-xlsx
+numpy
+python-dateutil
+pywin32
