@@ -187,11 +187,11 @@ class Interfaz(QMainWindow, form_class):
         self.lineEdit_16.setValidator(validator)
         
         if isDev:
-            self.lineEdit_5.setText("Abastecimiento/Costo_05.01.2023.xlsx")
-            self.lineEdit_4.setText("Abastecimiento/Abastecimiento_05.01.2023.xlsx")
-            self.lineEdit_3.setText("Abastecimiento/Precio_05.01.2023.xlsx")
-            self.lineEdit_2.setText("Abastecimiento/Stock_05.01.2023.xlsx")
-            self.lineEdit.setText("Abastecimiento/Set_05.01.2023.xlsx")
+            self.lineEdit_5.setText("Abastecimiento/Costo_29.01.2025.xlsx")
+            self.lineEdit_4.setText("Abastecimiento/Abastecimiento_29.01.2025.xlsx")
+            self.lineEdit_3.setText("Abastecimiento/Precio_29.01.2025.xlsx")
+            self.lineEdit_2.setText("Abastecimiento/Stock_29.01.2025.xlsx")
+            self.lineEdit.setText("Abastecimiento/Set_29.01.2025.xlsx")
             
         
     def seleccionarArchvio(self, row):

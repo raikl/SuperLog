@@ -670,7 +670,7 @@ class Modelador(mod.Modelo, rep.Reporter):
             vr = j
             if isinstance(vr, int) and vr == 60472:
                     vr = "P" + str(vr) 
-            if j not in setJPRECIOJH and self.nodos[vr][0] == "Sucursal":
+            if j not in setJPRECIOJH and str(j)+'S' not in setJPRECIOJH and self.nodos[vr][0] == "Sucursal":
                 if len(erroresJPv) > 0:
                     erroresJPv += ", "
                 erroresJPv += str(j)
