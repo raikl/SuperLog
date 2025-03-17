@@ -7,6 +7,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <regex>
 #include <algorithm>
 #include <exception>
 #include "importPython.h"
@@ -41,6 +42,34 @@ void replaceAll(string &s, const string &search, const string &replace) {
 	}
 }
 
+vector<string> fromString(string str) {
+	vector<string> elements;
+
+	try {
+		regex r("[^\\]\\[,\"]+");
+
+		auto it = std::sregex_iterator(str.begin(), str.end(), r);
+		auto end = std::sregex_iterator();
+	
+		for (; it != end; ++it) {
+			auto match = *it;
+			auto element = match.str();
+			auto it2 = it;
+			++it2;
+			if (it2 != end) {
+				replaceAll(element, ".", "");
+			}
+			elements.push_back(element);
+			//cout << element << endl;
+		}
+	}
+	catch (std::exception const& e) {
+		std::cout << e.what() << "\n";
+	}
+	return elements;
+}
+
+
 
 void scan_links(ifstream& inputa, Graph& G, vector<Edge>& Edges, vector <Node>& Nodes, vector<Producto>& Prod)
 {
@@ -53,19 +82,19 @@ void scan_links(ifstream& inputa, Graph& G, vector<Edge>& Edges, vector <Node>& 
 
 		if (!line.empty())
 		{
-			istringstream s(line);
-			while (getline(s, topic, ','))
-				row.push_back(topic);
+			//istringstream s(line);
+			//while (getline(s, topic, ','))
+			//	row.push_back(topic);
 
-			vector<string> partes = split(row[0], "_", false);
-			vector<string> finalp;
-			for (auto i : partes) {
+			//cout << line << '\n';
+			//vector<string> partes = split(row[0], "_", false);
+			vector<string> finalp = fromString(line);
+			/*for (auto i : partes) {
 				string str = i;
 				replaceAll(str, ".", "");
 				finalp.push_back(str);
-			}
-			finalp.push_back(row[1]);
-
+			}*/
+			//finalp.push_back(row[1]);
 
 			string NOF, NDF, NDFF;
 			bool superm;
@@ -146,18 +175,17 @@ void scan_linksCUAD(ifstream& inputa, ifstream& inputCUAD, Graph& G, vector<Edge
 
         if (!line.empty())
         {
-            istringstream s(line);
-            while (getline(s, topic, ','))
-                row.push_back(topic);
-
-            vector<string> partes = split(row[0], "_", false);
-            vector<string> finalp;
-            for (auto i : partes) {
+            //istringstream s(line);
+            //while (getline(s, topic, ','))
+            //    row.push_back(topic);
+            //vector<string> partes = split(row[0], "_", false);
+            vector<string> finalp = fromString(line);
+            /*for (auto i : partes) {
                 string str = i;
                 replaceAll(str, ".", "");
                 finalp.push_back(str);
-            }
-            finalp.push_back(row[1]);
+            }*/
+            //finalp.push_back(row[1]);
             
             string NOF, NDF, NDFF;
             bool superm;
@@ -234,18 +262,18 @@ void scan_linksCUAD(ifstream& inputa, ifstream& inputCUAD, Graph& G, vector<Edge
 
         if (!line.empty())
         {
-            istringstream s(line);
+            /*istringstream s(line);
             while (getline(s, topic, ','))
                 row.push_back(topic);
 
-            vector<string> partes = split(row[0], "_", false);
-            vector<string> finalp;
-            for (auto i : partes) {
+            vector<string> partes = split(row[0], "_", false);*/
+			vector<string> finalp = fromString(line);
+            /*for (auto i : partes) {
                 string str = i;
                 replaceAll(str, ".", "");
                 finalp.push_back(str);
             }
-            finalp.push_back(row[1]);
+            finalp.push_back(row[1]);*/
 
             string NOF, NDF, NDFF;
             bool superm;
@@ -596,7 +624,7 @@ set<string> cargaVectores(char *argv[], vector<Node>& Nodes, Graph& G, vector<Pr
 	//////////////////////////////////////////////////////////
 	ifstream inArcos(argv[1]);
 	if (inArcos.fail()){
-		fprintf(stderr, "Error al abrir el archivo: %s.\n", argv[17]);
+		fprintf(stderr, "Error al abrir el archivo: %s.\n", argv[1]);
 		exit(1);
 	}
     
@@ -605,7 +633,7 @@ set<string> cargaVectores(char *argv[], vector<Node>& Nodes, Graph& G, vector<Pr
 	else {
 		ifstream inArcosCUAD(argv[2]);
 		if (inArcosCUAD.fail()){
-			fprintf(stderr, "Error al abrir el archivo: %s.\n", argv[18]);
+			fprintf(stderr, "Error al abrir el archivo: %s.\n", argv[2]);
 			exit(1);
 		}
 		scan_linksCUAD(inArcos, inArcosCUAD, G, Edges, Nodes, Prod);
