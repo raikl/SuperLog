@@ -69,7 +69,7 @@ def cuadratura(JHSET, soly, soly2, solys, solxi, solxri, solx2i, solxsi, ofx, SE
             
     qx = {}
     for h,g,i,j in qarcsxd:
-            qx[h,g,i,j] = qm.addVar(vtype="C",lb=0,name='qx_%s_%s_%s_%s' % (h, g, i, j))
+            qx[h,g,i,j] = qm.addVar(vtype="C",lb=0,name='qx[%s,%s,%s,%s]' % (h, g, i, j))
 
     qarcsxrd = {}
     for (h,g,l,i,j) in arcsxrd:
@@ -78,7 +78,7 @@ def cuadratura(JHSET, soly, soly2, solys, solxi, solxri, solx2i, solxsi, ofx, SE
             
     qxr = {}
     for h,g,l,i,j in qarcsxrd:
-            qxr[h,g,l,i,j] = qm.addVar(vtype="C",lb=0,name='qxr_%s_%s_%s_%s_%s' % (h, g, l, i, j))
+            qxr[h,g,l,i,j] = qm.addVar(vtype="C",lb=0,name='qxr[%s,%s,%s,%s,%s]' % (h, g, l, i, j))
 
     qarcsx2d = {}
     for (h,g,l,i,j) in arcsx2d:
@@ -87,7 +87,7 @@ def cuadratura(JHSET, soly, soly2, solys, solxi, solxri, solx2i, solxsi, ofx, SE
             
     qx2 = {}
     for h,g,l,i,j in qarcsx2d:
-            qx2[h,g,l,i,j] = qm.addVar(vtype="C",lb=0,name='qx2_%s_%s_%s_%s_%s' % (h, g, l, i, j))
+            qx2[h,g,l,i,j] = qm.addVar(vtype="C",lb=0,name='qx2[%s,%s,%s,%s,%s]' % (h, g, l, i, j))
 
     qarcsxsd = {}
     for (h,g,jd,i,j1,j2) in arcsxsd:
@@ -96,16 +96,16 @@ def cuadratura(JHSET, soly, soly2, solys, solxi, solxri, solx2i, solxsi, ofx, SE
             
     qxs = {}
     for h,g,jd,i,j1,j2 in qarcsxsd:
-            qxs[h,g,jd,i,j1,j2] = qm.addVar(vtype="C",lb=0,name='qxs_%s_%s_%s_%s_%s_%s' % (h, g, jd, i, j1, j2))
+            qxs[h,g,jd,i,j1,j2] = qm.addVar(vtype="C",lb=0,name='qxs[%s,%s,%s,%s,%s,%s]' % (h, g, jd, i, j1, j2))
              
     qp = {} 
     qz = {} 
     qzc = {} 
     for i,j in arcij:
-        qzc[i,j] = qm.addVar(vtype="I",lb=0,name='qzc_%s_%s' % (i, j))   
+        qzc[i,j] = qm.addVar(vtype="I",lb=0,name='qzc[%s,%s]' % (i, j))   
         for f in F:
-            qp[i,j,f] = qm.addVar(vtype="C",lb=0,name='qp_%s_%s_%s' % (i, j, f))   
-            qz[i,j,f] = qm.addVar(vtype="I",lb=0,name='qz_%s_%s_%s' % (i, j, f))   
+            qp[i,j,f] = qm.addVar(vtype="C",lb=0,name='qp[%s,%s,%s]' % (i, j, f))   
+            qz[i,j,f] = qm.addVar(vtype="I",lb=0,name='qz[%s,%s,%s]' % (i, j, f))   
 
     qp2 = {} 
     qz2 = {} 
@@ -114,25 +114,25 @@ def cuadratura(JHSET, soly, soly2, solys, solxi, solxri, solx2i, solxsi, ofx, SE
     qzr = {} 
     qzrc = {} 
     for l,i,j in acdir:
-        qz2c[l,i,j] = qm.addVar(vtype="I",lb=0,name='qz2c_%s_%s_%s' % (l, i, j))   
+        qz2c[l,i,j] = qm.addVar(vtype="I",lb=0,name='qz2c[%s,%s,%s]' % (l, i, j))   
         for f in F:
-            qp2[l,i,j,f] = qm.addVar(vtype="C",lb=0,name='qp2_%s_%s_%s_%s' % (l, i, j, f))   
-            qz2[l,i,j,f] = qm.addVar(vtype="I",lb=0,name='qz2_%s_%s_%s_%s' % (l, i, j, f))
+            qp2[l,i,j,f] = qm.addVar(vtype="C",lb=0,name='qp2[%s,%s,%s,%s]' % (l, i, j, f))   
+            qz2[l,i,j,f] = qm.addVar(vtype="I",lb=0,name='qz2[%s,%s,%s,%s]' % (l, i, j, f))
         if i in cons:
-            qzrc[l,i,j] = qm.addVar(vtype="I",lb=0,name='qzrc_%s_%s_%s' % (l, i, j))   
+            qzrc[l,i,j] = qm.addVar(vtype="I",lb=0,name='qzrc[%s,%s,%s]' % (l, i, j))   
             for f in F:
-                qpr[l,i,j,f] = qm.addVar(vtype="C",lb=0,name='qpr_%s_%s_%s_%s' % (l, i, j, f))   
-                qzr[l,i,j,f] = qm.addVar(vtype="I",lb=0,name='qzr_%s_%s_%s_%s' % (l, i, j, f))
+                qpr[l,i,j,f] = qm.addVar(vtype="C",lb=0,name='qpr[%s,%s,%s,%s]' % (l, i, j, f))   
+                qzr[l,i,j,f] = qm.addVar(vtype="I",lb=0,name='qzr[%s,%s,%s,%s]' % (l, i, j, f))
 
     qps = {} 
     qzs = {} 
     qzsc = {} 
     for i,j1,j2 in arcijj:
-        qzsc[i,j1,j2] = qm.addVar(vtype="I",lb=0,name='qzsc_%s_%s_%s' % (i, j1, j2))   
+        qzsc[i,j1,j2] = qm.addVar(vtype="I",lb=0,name='qzsc[%s,%s,%s]' % (i, j1, j2))   
         for f in F:
-            qps[i,j1,j2,f] = qm.addVar(vtype="C",lb=0,name='qps_%s_%s_%s_%s' % (i, j1, j2, f))
+            qps[i,j1,j2,f] = qm.addVar(vtype="C",lb=0,name='qps[%s,%s,%s,%s]' % (i, j1, j2, f))
             for jd in {j1,j2}:
-                qzs[jd,i,j1,j2,f] = qm.addVar(vtype="I",lb=0,name='qzs_%s_%s_%s_%s_%s' % (jd, i, j1, j2, f))
+                qzs[jd,i,j1,j2,f] = qm.addVar(vtype="I",lb=0,name='qzs[%s,%s,%s,%s,%s]' % (jd, i, j1, j2, f))
 
 
     qzMc = {}
@@ -140,48 +140,48 @@ def cuadratura(JHSET, soly, soly2, solys, solxi, solxri, solx2i, solxsi, ofx, SE
     qzIc = {}
     qzFc = {}
     for i,j in arcij:
-        qzMc[i,j] = qm.addVar(vtype="I",lb=0,name='qzMc_%s_%s' % (i, j))   
-        qzNc[i,j] = qm.addVar(vtype="I",lb=0,name='qzNc_%s_%s' % (i, j))   
-        qzIc[i,j] = qm.addVar(vtype="B",lb=0,name='qzIc_%s_%s' % (i, j))   
-        qzFc[i,j] = qm.addVar(vtype="B",lb=0,name='qzFc_%s_%s' % (i, j))   
+        qzMc[i,j] = qm.addVar(vtype="I",lb=0,name='qzMc[%s,%s]' % (i, j))   
+        qzNc[i,j] = qm.addVar(vtype="I",lb=0,name='qzNc[%s,%s]' % (i, j))   
+        qzIc[i,j] = qm.addVar(vtype="B",lb=0,name='qzIc[%s,%s]' % (i, j))   
+        qzFc[i,j] = qm.addVar(vtype="B",lb=0,name='qzFc[%s,%s]' % (i, j))   
 
     qzMrc = {}
     qzNrc = {}
     qzIrc = {}
     qzFrc = {}
     for l,i in arcon:
-        qzMrc[l,i] = qm.addVar(vtype="I",lb=0,name='qzMrc_%s_%s' % (l, i))
-        qzNrc[l,i] = qm.addVar(vtype="I",lb=0,name='qzNrc_%s_%s' % (l, i))
-        qzIrc[l,i] = qm.addVar(vtype="B",lb=0,name='qzIrc_%s_%s' % (l, i))
-        qzFrc[l,i] = qm.addVar(vtype="B",lb=0,name='qzFrc_%s_%s' % (l, i))
+        qzMrc[l,i] = qm.addVar(vtype="I",lb=0,name='qzMrc[%s,%s]' % (l, i))
+        qzNrc[l,i] = qm.addVar(vtype="I",lb=0,name='qzNrc[%s,%s]' % (l, i))
+        qzIrc[l,i] = qm.addVar(vtype="B",lb=0,name='qzIrc[%s,%s]' % (l, i))
+        qzFrc[l,i] = qm.addVar(vtype="B",lb=0,name='qzFrc[%s,%s]' % (l, i))
 
     qzM2c = {} 
     qzN2c = {} 
     qzI2c = {} 
     qzF2c = {}
     for l,i,j in acdir:
-        qzM2c[l,i,j] = qm.addVar(vtype="I",lb=0,name='qzM2c_%s_%s_%s' % (l, i, j))   
-        qzN2c[l,i,j] = qm.addVar(vtype="I",lb=0,name='qzN2c_%s_%s_%s' % (l, i, j))   
-        qzI2c[l,i,j] = qm.addVar(vtype="B",lb=0,name='qzI2c_%s_%s_%s' % (l, i, j))   
-        qzF2c[l,i,j] = qm.addVar(vtype="B",lb=0,name='qzF2c_%s_%s_%s' % (l, i, j))   
+        qzM2c[l,i,j] = qm.addVar(vtype="I",lb=0,name='qzM2c[%s,%s,%s]' % (l, i, j))   
+        qzN2c[l,i,j] = qm.addVar(vtype="I",lb=0,name='qzN2c[%s,%s,%s]' % (l, i, j))   
+        qzI2c[l,i,j] = qm.addVar(vtype="B",lb=0,name='qzI2c[%s,%s,%s]' % (l, i, j))   
+        qzF2c[l,i,j] = qm.addVar(vtype="B",lb=0,name='qzF2c[%s,%s,%s]' % (l, i, j))   
 
     qzMsc = {} 
     qzNsc = {} 
     qzIsc = {} 
     qzFsc = {}
     for i,j1,j2 in arcijj:
-        qzMsc[i,j1,j2] = qm.addVar(vtype="I",lb=0,name='qzMsc_%s_%s_%s' % (i, j1, j2))   
-        qzNsc[i,j1,j2] = qm.addVar(vtype="I",lb=0,name='qzNsc_%s_%s_%s' % (i, j1, j2))   
-        qzIsc[i,j1,j2] = qm.addVar(vtype="B",lb=0,name='qzIsc_%s_%s_%s' % (i, j1, j2))   
-        qzFsc[i,j1,j2] = qm.addVar(vtype="B",lb=0,name='qzFsc_%s_%s_%s' % (i, j1, j2))   
+        qzMsc[i,j1,j2] = qm.addVar(vtype="I",lb=0,name='qzMsc[%s,%s,%s]' % (i, j1, j2))   
+        qzNsc[i,j1,j2] = qm.addVar(vtype="I",lb=0,name='qzNsc[%s,%s,%s]' % (i, j1, j2))   
+        qzIsc[i,j1,j2] = qm.addVar(vtype="B",lb=0,name='qzIsc[%s,%s,%s]' % (i, j1, j2))   
+        qzFsc[i,j1,j2] = qm.addVar(vtype="B",lb=0,name='qzFsc[%s,%s,%s]' % (i, j1, j2))   
 
 
             
     qo1 = {}
     qo2 = {}
     for (h,g,i) in qofx:
-        qo1[h,g,i] = qm.addVar(vtype="C",lb=0,name='qo1_%s_%s_%s' % (h,g,i))
-        qo2[h,g,i] = qm.addVar(vtype="C",lb=0,name='qo2_%s_%s_%s' % (h,g,i))
+        qo1[h,g,i] = qm.addVar(vtype="C",lb=0,name='qo1[%s,%s,%s]' % (h,g,i))
+        qo2[h,g,i] = qm.addVar(vtype="C",lb=0,name='qo2[%s,%s,%s]' % (h,g,i))
         
 
     print('Se definieron las variables en cuadratura')    

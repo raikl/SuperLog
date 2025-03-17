@@ -164,7 +164,7 @@ class Reporter:
                             vr = int(vr)
                         except:
                             pass                        
-                    lin[3] = lin[3].replace("T1632", "T163_2").replace("P60472", "60472")
+                    #lin[3] = lin[3].replace("T1632", "T163_2").replace("P60472", "60472")
                     if cab[3:6] == "Tra" and self.nodos[vr][0] != "Venta Directa":
                         sap = self.sap["SAP2"]
                         if cab[6:] == "Cg" and self.materiales[int(lin[1])].estado == "Congelado":

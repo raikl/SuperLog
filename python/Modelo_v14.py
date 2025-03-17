@@ -323,6 +323,7 @@ class Modelo:
         #   supermercados tienen requisito de 0.75*SL   parejo !  check this
         #
         LT = {}
+        
         for (h,j) in dori:
             if j in self.minSlNodos:
                 if self.minSlNodos[j]>1:
@@ -509,141 +510,141 @@ class Modelo:
            
         x = {}
         for h,g,i,j in arcsxd:
-            x[h,g,i,j] = m.addVar(vtype="C",lb=0,name='x_%s_%s_%s_%s' % (h, g, i, j))
+            x[h,g,i,j] = m.addVar(vtype="C",lb=0,name='x[%s,%s,%s,%s]' % (h, g, i, j))
 
         x2 = {}
         for h,g,l,i,j in arcsx2d:
-            x2[h,g,l,i,j] = m.addVar(vtype="C",lb=0,name='x2_%s_%s_%s_%s_%s' % (h, g, l, i, j))
+            x2[h,g,l,i,j] = m.addVar(vtype="C",lb=0,name='x2[%s,%s,%s,%s,%s]' % (h, g, l, i, j))
 
         xr = {}
         for h,g,l,i,j in arcsxrd:
-            xr[h,g,l,i,j] = m.addVar(vtype="C",lb=0,name='xr_%s_%s_%s_%s_%s' % (h, g, l, i, j))
+            xr[h,g,l,i,j] = m.addVar(vtype="C",lb=0,name='xr[%s,%s,%s,%s,%s]' % (h, g, l, i, j))
          
         xs = {}
         for h,g,jd,i,j1,j2 in arcsxsd:
-            xs[h,g,jd,i,j1,j2] = m.addVar(vtype="C",lb=0,name='xs_%s_%s_%s_%s_%s_%s' % (h, g, jd, i, j1, j2))
+            xs[h,g,jd,i,j1,j2] = m.addVar(vtype="C",lb=0,name='xs[%s,%s,%s,%s,%s,%s]' % (h, g, jd, i, j1, j2))
               
         p = {} 
         for i,j in arcij:
             for f in F:
-                p[i,j,f] = m.addVar(vtype="C",lb=0,name='p_%s_%s_%s' % (i, j, f))   
+                p[i,j,f] = m.addVar(vtype="C",lb=0,name='p[%s,%s,%s]' % (i, j, f))   
 
         pr = {} 
         for l,i,j in acdir:
             if i in cons:
                 for f in F:
-                    pr[l,i,j,f] = m.addVar(vtype="C",lb=0,name='pr_%s_%s_%s_%s' % (l, i, j, f))   
+                    pr[l,i,j,f] = m.addVar(vtype="C",lb=0,name='pr[%s,%s,%s,%s]' % (l, i, j, f))   
 
         p2 = {} 
         for l,i,j in acdir:
             for f in F:
-                p2[l,i,j,f] = m.addVar(vtype="C",lb=0,name='p2_%s_%s_%s_%s' % (l, i, j, f))   
+                p2[l,i,j,f] = m.addVar(vtype="C",lb=0,name='p2[%s,%s,%s,%s]' % (l, i, j, f))   
 
         ps = {} 
         for i,j1,j2 in arcijj:
             for f in F:
-                ps[i,j1,j2,f] = m.addVar(vtype="C",lb=0,name='ps_%s_%s_%s_%s' % (i, j1, j2, f))   
+                ps[i,j1,j2,f] = m.addVar(vtype="C",lb=0,name='ps[%s,%s,%s,%s]' % (i, j1, j2, f))   
 
         z = {} 
         for i,j in arcij:
             for f in F:
-                z[i,j,f] = m.addVar(vtype="I",lb=0,name='z_%s_%s_%s' % (i, j, f))   
+                z[i,j,f] = m.addVar(vtype="I",lb=0,name='z[%s,%s,%s]' % (i, j, f))   
 
         zr = {} 
         for l,i,j in acdir:
             if i in cons:
                 for f in F:
-                    zr[l,i,j,f] = m.addVar(vtype="I",lb=0,name='zr_%s_%s_%s_%s' % (l, i, j, f))   
+                    zr[l,i,j,f] = m.addVar(vtype="I",lb=0,name='zr[%s,%s,%s,%s]' % (l, i, j, f))   
 
         z2 = {} 
         for l,i,j in acdir:
             for f in F:
-                z2[l,i,j,f] = m.addVar(vtype="I",lb=0,name='z2_%s_%s_%s_%s' % (l, i, j, f))   
+                z2[l,i,j,f] = m.addVar(vtype="I",lb=0,name='z2[%s,%s,%s,%s]' % (l, i, j, f))   
 
         zs = {} 
         for i,j1,j2 in arcijj:
             for jd in {j1,j2}:
                 for f in F:
-                    zs[jd,i,j1,j2,f] = m.addVar(vtype="I",lb=0,name='zs_%s_%s_%s_%s_%s' % (jd, i, j1, j2, f))   
+                    zs[jd,i,j1,j2,f] = m.addVar(vtype="I",lb=0,name='zs[%s,%s,%s,%s,%s]' % (jd, i, j1, j2, f))   
 
         zc = {} 
         for i,j in arcij:
-            zc[i,j] = m.addVar(vtype="I",lb=0,name='zc_%s_%s' % (i, j))   
+            zc[i,j] = m.addVar(vtype="I",lb=0,name='zc[%s,%s]' % (i, j))   
 
         zrc = {} 
         for l,i,j in acdir:
             if i in cons:
-                zrc[l,i,j] = m.addVar(vtype="I",lb=0,name='zrc_%s_%s_%s' % (l, i, j))
+                zrc[l,i,j] = m.addVar(vtype="I",lb=0,name='zrc[%s,%s,%s]' % (l, i, j))
                 
         z2c = {} 
         for l,i,j in acdir:
-            z2c[l,i,j] = m.addVar(vtype="I",lb=0,name='z2c_%s_%s_%s' % (l, i, j))   
+            z2c[l,i,j] = m.addVar(vtype="I",lb=0,name='z2c[%s,%s,%s]' % (l, i, j))   
            
         zsc = {} 
         for i,j1,j2 in arcijj:
-            zsc[i,j1,j2] = m.addVar(vtype="I",lb=0,name='zsc_%s_%s_%s' % (i, j1, j2))   
+            zsc[i,j1,j2] = m.addVar(vtype="I",lb=0,name='zsc[%s,%s,%s]' % (i, j1, j2))   
             
         zMc = {}
         zNc = {}
         zIc = {}
         zFc = {}
         for i,j in arcij:
-            zMc[i,j] = m.addVar(vtype="I",lb=0,name='zMc_%s_%s' % (i, j))   
-            zNc[i,j] = m.addVar(vtype="I",lb=0,name='zNc_%s_%s' % (i, j))   
-            zIc[i,j] = m.addVar(vtype="B",lb=0,name='zIc_%s_%s' % (i, j))   
-            zFc[i,j] = m.addVar(vtype="B",lb=0,name='zFc_%s_%s' % (i, j))   
+            zMc[i,j] = m.addVar(vtype="I",lb=0,name='zMc[%s,%s]' % (i, j))   
+            zNc[i,j] = m.addVar(vtype="I",lb=0,name='zNc[%s,%s]' % (i, j))   
+            zIc[i,j] = m.addVar(vtype="B",lb=0,name='zIc[%s,%s]' % (i, j))   
+            zFc[i,j] = m.addVar(vtype="B",lb=0,name='zFc[%s,%s]' % (i, j))   
 
         zMrc = {}
         zNrc = {}
         zIrc = {}
         zFrc = {}
         for l,i in arcon:
-            zMrc[l,i] = m.addVar(vtype="I",lb=0,name='zMrc_%s_%s' % (l, i))
-            zNrc[l,i] = m.addVar(vtype="I",lb=0,name='zNrc_%s_%s' % (l, i))
-            zIrc[l,i] = m.addVar(vtype="B",lb=0,name='zIrc_%s_%s' % (l, i))
-            zFrc[l,i] = m.addVar(vtype="B",lb=0,name='zFrc_%s_%s' % (l, i))
+            zMrc[l,i] = m.addVar(vtype="I",lb=0,name='zMrc[%s,%s]' % (l, i))
+            zNrc[l,i] = m.addVar(vtype="I",lb=0,name='zNrc[%s,%s]' % (l, i))
+            zIrc[l,i] = m.addVar(vtype="B",lb=0,name='zIrc[%s,%s]' % (l, i))
+            zFrc[l,i] = m.addVar(vtype="B",lb=0,name='zFrc[%s,%s]' % (l, i))
 
         zM2c = {} 
         zN2c = {} 
         zI2c = {} 
         zF2c = {}
         for l,i,j in acdir:
-            zM2c[l,i,j] = m.addVar(vtype="I",lb=0,name='zM2c_%s_%s_%s' % (l, i, j))   
-            zN2c[l,i,j] = m.addVar(vtype="I",lb=0,name='zN2c_%s_%s_%s' % (l, i, j))   
-            zI2c[l,i,j] = m.addVar(vtype="B",lb=0,name='zI2c_%s_%s_%s' % (l, i, j))   
-            zF2c[l,i,j] = m.addVar(vtype="B",lb=0,name='zF2c_%s_%s_%s' % (l, i, j))   
+            zM2c[l,i,j] = m.addVar(vtype="I",lb=0,name='zM2c[%s,%s,%s]' % (l, i, j))   
+            zN2c[l,i,j] = m.addVar(vtype="I",lb=0,name='zN2c[%s,%s,%s]' % (l, i, j))   
+            zI2c[l,i,j] = m.addVar(vtype="B",lb=0,name='zI2c[%s,%s,%s]' % (l, i, j))   
+            zF2c[l,i,j] = m.addVar(vtype="B",lb=0,name='zF2c[%s,%s,%s]' % (l, i, j))   
 
         zMsc = {} 
         zNsc = {} 
         zIsc = {} 
         zFsc = {}
         for i,j1,j2 in arcijj:
-            zMsc[i,j1,j2] = m.addVar(vtype="I",lb=0,name='zMsc_%s_%s_%s' % (i, j1, j2))   
-            zNsc[i,j1,j2] = m.addVar(vtype="I",lb=0,name='zNsc_%s_%s_%s' % (i, j1, j2))   
-            zIsc[i,j1,j2] = m.addVar(vtype="B",lb=0,name='zIsc_%s_%s_%s' % (i, j1, j2))   
-            zFsc[i,j1,j2] = m.addVar(vtype="B",lb=0,name='zFsc_%s_%s_%s' % (i, j1, j2))   
+            zMsc[i,j1,j2] = m.addVar(vtype="I",lb=0,name='zMsc[%s,%s,%s]' % (i, j1, j2))   
+            zNsc[i,j1,j2] = m.addVar(vtype="I",lb=0,name='zNsc[%s,%s,%s]' % (i, j1, j2))   
+            zIsc[i,j1,j2] = m.addVar(vtype="B",lb=0,name='zIsc[%s,%s,%s]' % (i, j1, j2))   
+            zFsc[i,j1,j2] = m.addVar(vtype="B",lb=0,name='zFsc[%s,%s,%s]' % (i, j1, j2))   
             
         y = {}
         for (i,j,k) in ARCVK:
-            y[i,j,k] = m.addVar(vtype="I",lb=0,name='y_%s_%s_%s' % (i, j, k))   
+            y[i,j,k] = m.addVar(vtype="I",lb=0,name='y[%s,%s,%s]' % (i, j, k))   
 
         y2 = {}
         for (l,i,j,k) in ARCV2K:
-            y2[l,i,j,k] = m.addVar(vtype="I",lb=0,name='y2_%s_%s_%s_%s' % (l, i, j, k))   
+            y2[l,i,j,k] = m.addVar(vtype="I",lb=0,name='y2[%s,%s,%s,%s]' % (l, i, j, k))   
             
         ys = {}
         for (i,j1,j2,k) in ARCVSK:
-            ys[i,j1,j2,k] = m.addVar(vtype="I",lb=0,name='ys_%s_%s_%s_%s' % (i, j1, j2, k))   
+            ys[i,j1,j2,k] = m.addVar(vtype="I",lb=0,name='ys[%s,%s,%s,%s]' % (i, j1, j2, k))   
             
         o1 = {}
         o2 = {}
         for (h,g,i) in ofx:
-            o1[h,g,i] = m.addVar(vtype="C",lb=0,name='o1_%s_%s_%s' % (h,g,i))
-            o2[h,g,i] = m.addVar(vtype="C",lb=0,name='o2_%s_%s_%s' % (h,g,i))
+            o1[h,g,i] = m.addVar(vtype="C",lb=0,name='o1[%s,%s,%s]' % (h,g,i))
+            o2[h,g,i] = m.addVar(vtype="C",lb=0,name='o2[%s,%s,%s]' % (h,g,i))
             
         u = {}
         for (h,g,j) in dfx:
-            u[h,g,j] = m.addVar(vtype="C",lb=0,name='u_%s_%s_%s' % (h,g,j))
+            u[h,g,j] = m.addVar(vtype="C",lb=0,name='u[%s,%s,%s]' % (h,g,j))
 
 
         print('Se definieron las variables ')    
@@ -812,7 +813,7 @@ class Modelo:
 
         if m.status >= 3 and m.status <=4:
             m.computeIIS()
-            m.write(self.pathLogLogistica + '/v13largoINF.ilp')
+            m.write(self.pathTmpLogistica + '/v13largoINF.ilp')
             raise ValueError("Error en optimización. Modelo de optimización de camiones es infactible.");
 
         #
@@ -915,7 +916,7 @@ class Modelo:
 
         var_vals = []
         for indx in range(len(var_names)):
-            ax = var_names[indx].split('_')
+            ax = var_names[indx].split('[')          # var_names now  varn[ind0,ind1,ind2] 
             var_vals.append(var_values[indx])
             if ax[0][:1] =='x':
                 if abs(round(var_values[indx])-var_values[indx]) < 1e-5:
@@ -952,7 +953,7 @@ class Modelo:
 
             var_vals = []
             for indx in range(len(var_names)):
-                ax = var_names[indx].split('_')
+                ax = var_names[indx].split('[')
                 var_vals.append(var_values[indx])
                 if ax[0][:2] =='qx':
                     if abs(round(var_values[indx])-var_values[indx]) < 1e-5:

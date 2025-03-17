@@ -17,7 +17,7 @@ import traceback
 
 
 form_class = uic.loadUiType("interfaz.ui")[0]  # Load the UI
-isDev = None#1
+isDev = 1#None#1
 
 class Proceso():
     def __init__(self, cajasPallet, costoProduccion, demandaCliente, familiaProductos, maestroMateriales, nodos, precioVenta, tarifas, stock, sets, archCuadratura, archRutas, fecha, archIndicadores, carpSalida, tiempoLimite, archDetalle, conCuadratura, compartidos, prodNoConsolida, licencia):
@@ -187,11 +187,11 @@ class Interfaz(QMainWindow, form_class):
         self.lineEdit_16.setValidator(validator)
         
         if isDev:
-            self.lineEdit_5.setText("Abastecimiento/Costo_29.01.2025.xlsx")
-            self.lineEdit_4.setText("Abastecimiento/Abastecimiento_29.01.2025.xlsx")
-            self.lineEdit_3.setText("Abastecimiento/Precio_29.01.2025.xlsx")
-            self.lineEdit_2.setText("Abastecimiento/Stock_29.01.2025.xlsx")
-            self.lineEdit.setText("Abastecimiento/Set_29.01.2025.xlsx")
+            self.lineEdit_5.setText("Abastecimiento/Costo_15.03.2025.xlsx")
+            self.lineEdit_4.setText("Abastecimiento/Abastecimiento_15.03.2025.xlsx")
+            self.lineEdit_3.setText("Abastecimiento/Precio_15.03.2025.xlsx")
+            self.lineEdit_2.setText("Abastecimiento/Stock_15.03.2025.xlsx")
+            self.lineEdit.setText("Abastecimiento/Set_15.03.2025.xlsx")
             
         
     def seleccionarArchvio(self, row):

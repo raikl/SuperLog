@@ -190,7 +190,7 @@ class Modelador():
         else:
             self.tm = Model('ppl', env=self.catalogo["Env"])
         self.tm.setParam('LogFile', self.pathLog + '/Lognobaja.log')
-        self.tm.setParam('TimeLimit', self.catalogo["Tiempo Límite"]*60)
+        self.tm.setParam('TimeLimit', self.catalogo["Tiempo Límite"])
         self.itinerario = self.modAgenda.agendar(self.tm)
         #except Exception as e:
         #    print(traceback.format_exc())

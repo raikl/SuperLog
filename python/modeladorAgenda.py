@@ -52,16 +52,25 @@ def buscarZDMO(e, nodosCentro, nodosZDMO):
             break
     return nodosZDMO[pos]
     
+def inicializarListaConStringVacio(base, origenes):
+    lst = []
+    for i in range(0, base):
+        lst.append("");
+    for e in origenes.keys():
+        for s in origenes[e].keys():
+            for t in origenes[e][s].keys():
+                lst.append("");
+    return lst
 
 def convertirRutas(matriz, nodosCentro, nodosZDMO):
     mRtn = {}
     fc = {"Refrigerado":('F', 'light_yellow'), "Congelado":('C', 'pale_blue')}
     cargaRutas, origenes = leerCargaRutas(matriz)
     
-    mRtn[0] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-    mRtn[1] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-    mRtn[2] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-    mRtn[3] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+    mRtn[0] = inicializarListaConStringVacio(6, origenes)#["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+    mRtn[1] = inicializarListaConStringVacio(6, origenes)#["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+    mRtn[2] = inicializarListaConStringVacio(6, origenes)#["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+    mRtn[3] = inicializarListaConStringVacio(6, origenes)#["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
     
     cntCol = 6
     for e in origenes.keys():
@@ -73,12 +82,12 @@ def convertirRutas(matriz, nodosCentro, nodosZDMO):
                 cntCol += 1
     
     cnt = 4
-    mRtn[cnt] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+    mRtn[cnt] = inicializarListaConStringVacio(6, origenes)#["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
     eAnt = list(cargaRutas.keys())[0]
     for e in cargaRutas.keys():
         if e[0] != eAnt[0] or e[2] != eAnt[2] or e[3] != eAnt[3]:
             cnt += 1
-            mRtn[cnt] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+            mRtn[cnt] = inicializarListaConStringVacio(6, origenes)#["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
  
         mRtn[cnt][0] = int(e[3])
@@ -225,10 +234,12 @@ class Agenda():
                 sectorEstado = catalogo["Rutas:Rutas"][3][j].split(" ") 
                 if 'PlP029' in rutasCodigoRuta[i-4].split('-'):
                     try:
-                       cargas[self.rutasNroCamion[i-4],nodosCentro[nodosZDMO.index(planta)], mSectores[sectorEstado[0]], mEstados[sectorEstado[1]]] = float(catalogo["Rutas:Rutas"][i][j])
+                        cargas[self.rutasNroCamion[i-4],nodosCentro[nodosZDMO.index(planta)], mSectores[sectorEstado[0]], mEstados[sectorEstado[1]]] = float(catalogo["Rutas:Rutas"][i][j])
                     except:
-                       cargas[self.rutasNroCamion[i-4],nodosCentro[nodosZDMO.index(planta)], mSectores[sectorEstado[0]], mEstados[sectorEstado[1]]] = 0.0
-
+                        try:
+                            cargas[self.rutasNroCamion[i-4],nodosCentro[nodosZDMO.index(planta)], mSectores[sectorEstado[0]], mEstados[sectorEstado[1]]] = 0.0
+                        except:
+                            pass
        
 #
 #      clave es x[0] 2^0 + x[1] 2^1 + x[2] 2^2 
@@ -483,6 +494,7 @@ class Agenda():
 
         x = {}
         y = {}
+
         for i in self.locvisit:
             x[i] = tm.addVar(vtype="C",lb=0,name='x_%s' % i)
             y[i] = tm.addVar(vtype="C",lb=0,name='y_%s' % i)
@@ -613,8 +625,8 @@ class Agenda():
         if tm.status >= 3 and tm.status <=4:
             tm.computeIIS()
             tm.write(outpath + '/capacprob.ilp')
-            #raise ValueError("Error en optimización. Modelo de optimización de camiones es infactible.")
-            print("Error en optimización. Modelo de agendamiento de camiones es infactible.")
+            raise ValueError("Error en optimización. Modelo de optimización de camiones es infactible.")
+            #print("Error en optimización. Modelo de agendamiento de camiones es infactible.")
 
 
         # return tf, alp
